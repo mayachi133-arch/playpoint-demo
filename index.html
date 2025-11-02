@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>рӏау роіnt — تسجيل تجريبي</title>
+  <style>
+    :root { --bg:#0b1220; --card:#0f1724; --accent:#1a73e8; --muted:#9fb0c8; color-scheme:dark; }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;color:#e6eef8;background:linear-gradient(180deg,#061021 0%, #04101a 100%)}
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:420px;max-width:96%;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:22px;box-shadow:0 10px 30px rgba(2,6,23,0.7)}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0077d9);display:flex;align-items:center;justify-content:center;font-weight:700}
+    h1{font-size:18px;margin:0}
+    p.lead{color:var(--muted);margin:6px 0 14px;font-size:13px}
+    label{display:block;font-size:13px;margin-top:10px;color:var(--muted)}
+    input,button,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;font-size:14px}
+    .row{display:flex;gap:8px}
+    .btn-primary{margin-top:14px;background:var(--accent);border:none;color:#04202a;font-weight:700;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);margin-top:8px}
+    .muted{color:var(--muted);font-size:13px;margin-top:8px}
+    pre{background:#031022;padding:10px;border-radius:8px;overflow:auto;color:var(--muted);font-size:13px}
+    .warning{background:#ff9800;color:#000;padding:12px;border-radius:8px;margin:12px 0;font-size:13px;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <div class="brand">
+        <div class="logo">рP</div>
+        <div>
+          <h1 id="title">рӏау роіnt</h1>
+          <div class="muted">تسجيل تجريبي — لا تدخل كلمات المرور الحقيقية</div>
+        </div>
+      </div>
+
+      <div class="warning">⚠️ هذه نسخة تجريبية ثابتة - لا تتصل بخادم حقيقي</div>
+
+      <p class="lead">سجل الدخول لتجربة الواجهة (البيانات محلية فقط).</p>
+
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label for="user">اسم المستخدم</label>
+        <input id="user" name="user" placeholder="مثال: ali" required />
+
+        <label for="contact">بريد / هاتف (عام)</label>
+        <input id="contact" name="contact" placeholder="مثال: ali@example.com أو 712345678" required />
+
+        <label for="note">رمز/ملاحظة تجريبية</label>
+        <input id="note" name="note" placeholder="مثال: CODE-1234 (لا تحوي كلمات مرور)" />
+
+        <button type="button" id="nextBtn" class="btn-primary">Next</button>
+        <button type="button" id="clearBtn" class="btn-ghost">مسح الحقول</button>
+      </form>
+
+      <div class="muted">معاينة آخر إرسال:</div>
+      <pre id="preview">لا توجد بيانات بعد.</pre>
+    </div>
+  </div>
+
+<script>
+document.getElementById('nextBtn').addEventListener('click', async () => {
+  const user = document.getElementById('user').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const note = document.getElementById('note').value.trim();
+
+  if (!user || !contact) {
+    alert('املأ اسم المستخدم والبريد/الهاتف (حقول عامة، لا تدخل كلمات مرور).');
+    return;
+  }
+
+  const previewText = `المستخدم: ${user}\nالبريد/الهاتف: ${contact}\nملاحظة: ${note || '(بدون)'}\nالوقت: ${new Date().toLocaleString('ar')}`;
+  document.getElementById('preview').textContent = previewText;
+
+  alert('✅ تم حفظ البيانات محلياً (هذه نسخة تجريبية بدون خادم)');
+});
+
+document.getElementById('clearBtn').addEventListener('click', () => {
+  document.getElementById('user').value = '';
+  document.getElementById('contact').value = '';
+  document.getElementById('note').value = '';
+  document.getElementById('preview').textContent = 'لا توجد بيانات بعد.';
+});
+</script>
+</body>
+</html>
